@@ -91,9 +91,11 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @ExperimentalMaterialApi
 @Composable
-fun MyApp(viewModel: WeatherViewModel,
-          units: MutableState<UNITS>,
-          darkTheme: MutableState<Boolean>) {
+fun MyApp(
+    viewModel: WeatherViewModel,
+    units: MutableState<UNITS>,
+    darkTheme: MutableState<Boolean>
+) {
 
     Log.d(TAG, "MyApp")
 
@@ -112,7 +114,8 @@ fun MyApp(viewModel: WeatherViewModel,
             }
         },
         sheetBackgroundColor = MaterialTheme.colors.primary,
-        scaffoldState = bottomSheetScaffoldState, sheetPeekHeight = 0.dp) {
+        scaffoldState = bottomSheetScaffoldState, sheetPeekHeight = 0.dp
+    ) {
 
         Scaffold(
             topBar = {
@@ -120,7 +123,8 @@ fun MyApp(viewModel: WeatherViewModel,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 16.dp, top = 8.dp, end = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween){
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
 
                     val settingsIcon = painterResource(R.drawable.ic_settingsd)
                     val settingsDescription = stringResource(id = R.string.description_settings)
@@ -134,17 +138,20 @@ fun MyApp(viewModel: WeatherViewModel,
                                 bottomSheetOption.value = OPTIONS.SETTINGS
 
                                 @Suppress("DEPRECATION")
-                                Handler().postDelayed({
-                                    GlobalScope.launch {
-                                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                                            Log.d(TAG, "Opening settings")
-                                            bottomSheetScaffoldState.bottomSheetState.expand()
-                                        } else {
-                                            Log.d(TAG, "Collapsing settings")
-                                            bottomSheetScaffoldState.bottomSheetState.collapse()
+                                Handler().postDelayed(
+                                    {
+                                        GlobalScope.launch {
+                                            if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                                                Log.d(TAG, "Opening settings")
+                                                bottomSheetScaffoldState.bottomSheetState.expand()
+                                            } else {
+                                                Log.d(TAG, "Collapsing settings")
+                                                bottomSheetScaffoldState.bottomSheetState.collapse()
+                                            }
                                         }
-                                    }
-                                }, 250)
+                                    },
+                                    250
+                                )
                             }
                     )
 
@@ -165,15 +172,18 @@ fun MyApp(viewModel: WeatherViewModel,
                                 bottomSheetOption.value = OPTIONS.SEARCH
 
                                 @Suppress("DEPRECATION")
-                                Handler().postDelayed({
-                                    GlobalScope.launch {
-                                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                                            bottomSheetScaffoldState.bottomSheetState.expand()
-                                        } else {
-                                            bottomSheetScaffoldState.bottomSheetState.collapse()
+                                Handler().postDelayed(
+                                    {
+                                        GlobalScope.launch {
+                                            if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                                                bottomSheetScaffoldState.bottomSheetState.expand()
+                                            } else {
+                                                bottomSheetScaffoldState.bottomSheetState.collapse()
+                                            }
                                         }
-                                    }
-                                }, 250)
+                                    },
+                                    250
+                                )
                             }
                     )
                 }

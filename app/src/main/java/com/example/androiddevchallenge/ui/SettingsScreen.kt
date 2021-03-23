@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
 
 import androidx.annotation.StringRes
@@ -41,8 +56,8 @@ import com.example.androiddevchallenge.ui.theme.typography
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-enum class SELECTION {OPTION_1, OPTION_2}
-enum class OPTIONS { SETTINGS, SEARCH}
+enum class SELECTION { OPTION_1, OPTION_2 }
+enum class OPTIONS { SETTINGS, SEARCH }
 
 @Composable
 fun SettingsScreen(units: MutableState<UNITS>, darkTheme: MutableState<Boolean>) {
@@ -58,8 +73,8 @@ fun SettingsScreen(units: MutableState<UNITS>, darkTheme: MutableState<Boolean>)
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        val metricSelected = remember { mutableStateOf(SELECTION.OPTION_1)}
-        units.value = if(metricSelected.value == SELECTION.OPTION_1) {
+        val metricSelected = remember { mutableStateOf(SELECTION.OPTION_1) }
+        units.value = if (metricSelected.value == SELECTION.OPTION_1) {
             UNITS.METRIC
         } else {
             UNITS.IMPERIAL
@@ -80,7 +95,7 @@ fun SettingsScreen(units: MutableState<UNITS>, darkTheme: MutableState<Boolean>)
             SELECTION.OPTION_1
         }
 
-        val themeSelected = remember { mutableStateOf(option)}
+        val themeSelected = remember { mutableStateOf(option) }
 
         SelectOption(
             R.string.theme,
@@ -96,11 +111,13 @@ fun SettingsScreen(units: MutableState<UNITS>, darkTheme: MutableState<Boolean>)
 }
 
 @Composable
-fun SelectOption(@StringRes label: Int,
-                 @StringRes option1: Int,
-                 @StringRes option2: Int,
-                 selected: MutableState<SELECTION>,
-                 action: () -> Unit) {
+fun SelectOption(
+    @StringRes label: Int,
+    @StringRes option1: Int,
+    @StringRes option2: Int,
+    selected: MutableState<SELECTION>,
+    action: () -> Unit
+) {
 
     Row {
 
@@ -181,7 +198,8 @@ fun SelectOption(@StringRes label: Int,
 fun SearchScreen(viewModel: WeatherViewModel, units: UNITS, bottomSheetScaffoldState: BottomSheetScaffoldState) {
 
     Column(
-        modifier = Modifier.padding(30.dp)) {
+        modifier = Modifier.padding(30.dp)
+    ) {
 
         val city = remember { mutableStateOf("") }
         TextField(
@@ -224,7 +242,8 @@ fun SearchScreen(viewModel: WeatherViewModel, units: UNITS, bottomSheetScaffoldS
             City("Coimbra, Portugal", "40.2089113", "-8.4263396"),
             City("Mountain View, California, US", "37.4134508", "-122.1513074"),
             City("London, United Kingdom", "51.5287352", "-0.3817816"),
-            City("Lisboa, Portugal", "38.7437396", "-9.2302436"))
+            City("Lisboa, Portugal", "38.7437396", "-9.2302436")
+        )
 
         LazyColumn {
 

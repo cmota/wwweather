@@ -84,13 +84,13 @@ fun MyTheme(window: Window, darkTheme: Boolean = isSystemInDarkTheme(), content:
     window.navigationBarColor = colors.primary.toArgb()
 
     @Suppress("DEPRECATION")
-    if(darkTheme) {
+    if (darkTheme) {
         window.decorView.systemUiVisibility =
             window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and
-                    View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+                View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
         }
     } else {
         window.decorView.systemUiVisibility =
@@ -98,7 +98,7 @@ fun MyTheme(window: Window, darkTheme: Boolean = isSystemInDarkTheme(), content:
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-                    View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
     }
 

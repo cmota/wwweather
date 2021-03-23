@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
 
 import android.util.Log
@@ -45,13 +60,15 @@ import com.example.androiddevchallenge.utils.formatUnit
 import com.example.androiddevchallenge.utils.getDayOfWeek
 import com.example.androiddevchallenge.utils.getWeatherIcon
 import com.example.androiddevchallenge.utils.roundUp
-import java.util.*
+import java.util.Calendar
 
 private const val TAG = "MainScreen"
 
 @Composable
-fun MainScreen(viewModel: WeatherViewModel,
-               darkTheme: Boolean, units: UNITS,
+fun MainScreen(
+    viewModel: WeatherViewModel,
+    darkTheme: Boolean,
+    units: UNITS,
 ) {
 
     val weatherData by viewModel.weather.observeAsState()
@@ -102,7 +119,7 @@ fun MainScreen(viewModel: WeatherViewModel,
             AddMoreInformation(R.string.temperature_wind, formatUnit(context, roundUp(weather.wind), units, false))
 
             val value = roundUp(weather.humidity)
-            val humidity = if(value != null) {
+            val humidity = if (value != null) {
                 value + stringResource(id = R.string.unit_percentage)
             } else {
                 "-"
@@ -135,24 +152,28 @@ fun MainScreen(viewModel: WeatherViewModel,
 fun AddMoreInformation(@StringRes resId: Int, value: String?) {
     Row {
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .weight(1.0f)
-            .padding(end = 10.dp),
-            horizontalArrangement = Arrangement.End) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1.0f)
+                .padding(end = 10.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
             Text(
                 text = stringResource(id = resId),
                 style = typography.h3
             )
         }
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .weight(1.0f)
-            .padding(start = 10.dp),
-            horizontalArrangement = Arrangement.Start) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1.0f)
+                .padding(start = 10.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
             Text(
-                text = value?:"-",
+                text = value ?: "-",
                 style = typography.h4
             )
         }
@@ -162,7 +183,7 @@ fun AddMoreInformation(@StringRes resId: Int, value: String?) {
 @Composable
 fun AddForecast(temp: Daily, index: Int, selection: MutableState<Int>, darkTheme: Boolean, units: UNITS) {
     val selected = index == selection.value
-    
+
     val background = if (selected) {
         MaterialTheme.colors.primaryVariant
     } else {
@@ -182,7 +203,7 @@ fun AddForecast(temp: Daily, index: Int, selection: MutableState<Int>, darkTheme
             .padding(start = 8.dp, bottom = 16.dp, end = 8.dp)
             .clip(RoundedCornerShape(20.dp))
             .clickable {
-                selection.value = index    
+                selection.value = index
             },
         backgroundColor = background,
         shape = RoundedCornerShape(20.dp),
@@ -203,7 +224,7 @@ fun AddForecast(temp: Daily, index: Int, selection: MutableState<Int>, darkTheme
                 color = textColor
             )
 
-            val dailyIcon = painterResource(getWeatherIcon(temp.weather[0].icon, if(selected) !darkTheme else darkTheme))
+            val dailyIcon = painterResource(getWeatherIcon(temp.weather[0].icon, if (selected) !darkTheme else darkTheme))
             val description = stringResource(id = R.string.description_weather)
 
             Image(
