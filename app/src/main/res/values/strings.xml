@@ -9,5 +9,36 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name">AndroidDevChallenge</string>
+    <string name="app_name">wwweather</string>
+
+    <string name="feels_like">Feels like</string>
+
+    <string name="temperature_now">Now</string>
+    <string name="temperature_min_max">Min / Max</string>
+    <string name="temperature_wind">Wind</string>
+    <string name="temperature_humidity">Humidity</string>
+
+    <string name="unit_celsius">%sº</string>
+    <string name="unit_imperial">%sº</string>
+    <string name="unit_kmh">%s Km/h</string>
+    <string name="unit_mph">%s mph</string>
+    <string name="unit_percentage">%</string>
+
+    <string name="today">Today</string>
+
+    <string name="settings">Settings</string>
+    <string name="units">Units</string>
+    <string name="units_metric">Metric (ºC, Km/h)</string>
+    <string name="units_imperial">Imperial (ºF, mph)</string>
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <string name="search">Search</string>
+    <string name="search_recent">Recent Searches</string>
+
+    <!-- Content Description -->
+    <string name="description_weather">Weather image</string>
+    <string name="description_settings">Open settings</string>
+    <string name="description_search">Open search for location</string>
 </resources>
