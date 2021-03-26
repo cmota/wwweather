@@ -53,7 +53,7 @@ import com.example.androiddevchallenge.data.UNITS
 import com.example.androiddevchallenge.domain.model.City
 import com.example.androiddevchallenge.presentation.WeatherViewModel
 import com.example.androiddevchallenge.ui.theme.typography
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 enum class SELECTION { OPTION_1, OPTION_2 }
@@ -195,7 +195,7 @@ fun SelectOption(
 
 @ExperimentalMaterialApi
 @Composable
-fun SearchScreen(viewModel: WeatherViewModel, units: UNITS, bottomSheetScaffoldState: BottomSheetScaffoldState) {
+fun SearchScreen(viewModel: WeatherViewModel, units: UNITS, coroutineScope: CoroutineScope, bottomSheetScaffoldState: BottomSheetScaffoldState) {
 
     Column(
         modifier = Modifier.padding(30.dp)
@@ -254,7 +254,7 @@ fun SearchScreen(viewModel: WeatherViewModel, units: UNITS, bottomSheetScaffoldS
                     style = typography.h3,
                     modifier = Modifier.clickable {
                         viewModel.getWeather(value, units)
-                        GlobalScope.launch {
+                        coroutineScope.launch {
                             bottomSheetScaffoldState.bottomSheetState.collapse()
                         }
                     }

@@ -41,6 +41,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -54,7 +55,6 @@ import com.example.androiddevchallenge.ui.SearchScreen
 import com.example.androiddevchallenge.ui.SettingsScreen
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.typography
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 private const val TAG = "MainActivity"
@@ -99,6 +99,8 @@ fun MyApp(
 
     Log.d(TAG, "MyApp")
 
+    val coroutineScope = rememberCoroutineScope()
+
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(
             initialValue = BottomSheetValue.Collapsed
@@ -108,7 +110,7 @@ fun MyApp(
     BottomSheetScaffold(
         sheetContent = {
             if (bottomSheetOption.value == OPTIONS.SEARCH) {
-                SearchScreen(viewModel, units.value, bottomSheetScaffoldState)
+                SearchScreen(viewModel, units.value, coroutineScope, bottomSheetScaffoldState)
             } else {
                 SettingsScreen(units, darkTheme)
             }
@@ -140,7 +142,7 @@ fun MyApp(
                                 @Suppress("DEPRECATION")
                                 Handler().postDelayed(
                                     {
-                                        GlobalScope.launch {
+                                        coroutineScope.launch {
                                             if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
                                                 Log.d(TAG, "Opening settings")
                                                 bottomSheetScaffoldState.bottomSheetState.expand()
@@ -174,7 +176,7 @@ fun MyApp(
                                 @Suppress("DEPRECATION")
                                 Handler().postDelayed(
                                     {
-                                        GlobalScope.launch {
+                                        coroutineScope.launch {
                                             if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
                                                 bottomSheetScaffoldState.bottomSheetState.expand()
                                             } else {
